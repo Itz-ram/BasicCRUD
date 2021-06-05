@@ -2,7 +2,7 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'root',
+  password : '',
   database : 'nodedb'
 });
  
@@ -16,7 +16,7 @@ connection.connect(function(err) {
 });
 
 
-//select function
+// select function
  function select(){
    connection.query("SELECT * FROM TODO", function (err, result, fields) {
     if (err) throw err;
@@ -34,15 +34,21 @@ for (index = 0; index < result.length; index++) {
 
  //TODO
  //insertfunction
- function(ID, NAME, DESC){
+function insert(ID, NAME, DESC){
+	var sql = "INSERT INTO TODO values ("+ID+",'"+NAME+"','"+DESC+"')";
+	console.log(sql)
+
+connection.query(sql, function(err, result, fields) {
+	if(err) throw err;
+	console.log("inserted");
+});
 
  }
 
-
  //TODO
  //deleteFunction
-function(ID){
+// function(ID){
   
-}
+// }
 
-module.exports = { connection, select }
+module.exports = { connection, select, insert }
