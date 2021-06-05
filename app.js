@@ -4,16 +4,7 @@ const mysql = require('./mysql_connect')
 
 console.log("Server Started");
 
- mysql.connection.query("SELECT * FROM TODO", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result.length);
-    //console.log(result);
-
-for (index = 0; index < result.length; index++) {
-    console.log(result[index]);
-}
-
-  });
+mysql.select();
 //contributed dhanish/praveen/ram
 //read from console
 // const readline = require('readline').createInterface({
