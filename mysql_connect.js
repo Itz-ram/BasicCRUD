@@ -2,7 +2,7 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'root',
   database : 'nodedb'
 });
  
@@ -55,4 +55,4 @@ function delete1(ID){
 });
 }
 
-module.exports = { connection, select, delete1 }
+module.exports = { connection, select, insert, delete1 }
