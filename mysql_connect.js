@@ -42,13 +42,17 @@ connection.query(sql, function(err, result, fields) {
 	if(err) throw err;
 	console.log("inserted");
 });
-
- }
+}
 
  //TODO
  //deleteFunction
-// function(ID){
+function delete1(ID){
   
-// }
+  var sql="DELETE FROM TODO WHERE ID="+ID+" "
+  connection.query(sql, function (err) {
+  if (err) throw err;
+  console.log("deleted");
+});
+}
 
-module.exports = { connection, select, insert }
+module.exports = { connection, select, delete1 }
