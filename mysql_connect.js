@@ -32,7 +32,6 @@ for (index = 0; index < result.length; index++) {
  }
 
 
- //TODO
  //insertfunction
 function insert(ID, NAME, DESC){
 	var sql = "INSERT INTO TODO values ("+ID+",'"+NAME+"','"+DESC+"')";
@@ -44,7 +43,6 @@ connection.query(sql, function(err, result, fields) {
 });
 }
 
- //TODO
  //deleteFunction
 function delete1(ID){
   
@@ -55,4 +53,14 @@ function delete1(ID){
 });
 }
 
-module.exports = { connection, select, insert, delete1 }
+//updateFunction
+function update(ID,NAME, DESC){
+    var sql = "UPDATE TODO SET NAME = '"+ NAME +"', DESCR = '" + DESC + "' WHERE ID = " + ID;
+    connection.query(sql,function(err){
+      if (err) throw err
+        console.log("Updated values for ID : " + ID)
+    });
+
+}
+
+module.exports = { connection, select, insert, delete1, update }

@@ -1,5 +1,6 @@
 //var http = require('http');
 const mysql = require('./mysql_connect')
+const date = require('./date')
 
 // read from console
 const rl = require('readline').createInterface({
@@ -7,27 +8,31 @@ const rl = require('readline').createInterface({
   output: process.stdout
 });
 
+function printChoice(){
+  console.log('CURRENT TIME : ' + date.myDateTime())
+  console.log('Choose your operation')
+  console.log('1. Select')
+  console.log('2. Insert')
+  console.log('3. Delete')
+  console.log('4. Update')  
+}
+printChoice()
 
-
-//console.log("Server Started");
-
-// var run = true;
-// while(run){
-  console.log("Choose your operation")
-  console.log("1. Select")
-  console.log("2. Insert")
-  console.log("3. Delete")
 rl.question('Enter your CHOICE', (choice) => {
 switch(choice){
-case "1":
+case '1':
 selectFunction()
 break;
-case "2":
+case '2':
 insertFunction()
 break;
-case "3":
+case '3':
 deleteFunction()
 break;
+case '4':
+updateFunction()
+default:
+console.log('Enter correct choice . Restart and try again')
 }
 });
 
@@ -37,17 +42,12 @@ function selectFunction(){
   mysql.select()
 }
 
-
 function insertFunction(){
 // console.log("insert function")
-rl.question('Enter ID', (answer1) => {
-    rl.question('Enter NAME', (answer2) => {
-        rl.question('Enter DESC', (answer3) => {
-          console.log(answer1) 
-          console.log(answer2)
-          console.log(answer3)
-          mysql.insert(answer1,answer2,answer3)
-
+rl.question('Enter ID ', (id) => {
+    rl.question('Enter NAME ', (name) => {
+        rl.question('Enter DESC ', (desc) => {
+          mysql.insert(id, name, desc)
       });
     });
 });
@@ -57,9 +57,20 @@ rl.question('Enter ID', (answer1) => {
 
 function deleteFunction(){
   // console.log("delete function")
-  rl.question('Enter ID',(answer) =>{
-      mysql.delete1(answer)
+  rl.question('Enter ID ',(id) =>{
+      mysql.delete1(id)
   });
+}
+
+function updateFunction(){
+  rl.question('Enter the ID ',(id) =>{
+    rl.question('Enter the NAME ',(name) =>{
+      rl.question('Enter the DESC ',(desc) =>{
+          mysql.update(id, name, desc)
+      });
+    });
+  });
+
 }
  
 
